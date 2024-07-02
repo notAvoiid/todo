@@ -1,6 +1,7 @@
 package com.abreu.todo.controller;
 
-import com.abreu.todo.model.Task;
+import com.abreu.todo.model.dto.TaskRequestDTO;
+import com.abreu.todo.model.dto.TaskResponseDTO;
 import com.abreu.todo.service.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,17 +20,17 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Task>> findAll() {
-        return ResponseEntity.ok(taskService.findALl());
+    public ResponseEntity<List<TaskResponseDTO>> findAll() {
+        return ResponseEntity.ok(taskService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Task> findById(@PathVariable Long id) {
+    public ResponseEntity<TaskResponseDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(taskService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Task> save(@RequestBody Task data) {
+    public ResponseEntity<TaskResponseDTO> save(@RequestBody TaskRequestDTO data) {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.save(data));
     }
 }
