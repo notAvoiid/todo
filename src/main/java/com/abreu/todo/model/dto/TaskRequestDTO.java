@@ -13,7 +13,7 @@ public record TaskRequestDTO(
         @Size(min = 4, max = 30, message = "Description must be between 4 and 20 characters")
         String description,
 
-        @NotNull
+        @NotNull(message = "Priority must not be null!")
         Integer priority,
         Boolean done
 ) {
