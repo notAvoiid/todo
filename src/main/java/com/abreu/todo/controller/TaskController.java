@@ -4,10 +4,7 @@ import com.abreu.todo.model.Task;
 import com.abreu.todo.service.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,8 +23,13 @@ public class TaskController {
         return ResponseEntity.ok(taskService.findALl());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Task> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(taskService.findById(id));
+    }
+
     @PostMapping
-    public ResponseEntity<Task> save(Task data) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(data);
+    public ResponseEntity<Task> save(@RequestBody Task data) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(taskService.save(data));
     }
 }

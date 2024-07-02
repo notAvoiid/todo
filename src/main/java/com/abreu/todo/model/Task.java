@@ -25,5 +25,8 @@ public class Task {
     private String description;
 
     @Column(nullable = false)
-    private boolean done;
+    private Integer priority;
+
+    @Column(nullable = false)
+    private Boolean done;
 }
