@@ -30,7 +30,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<TaskResponseDTO> save(@RequestBody TaskRequestDTO data) {
+    public ResponseEntity<List<TaskResponseDTO>> save(@RequestBody TaskRequestDTO data) {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.save(data));
     }
 }

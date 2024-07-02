@@ -2,7 +2,6 @@ package com.abreu.todo.model;
 
 import com.abreu.todo.model.dto.TaskRequestDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,7 +26,7 @@ public class Task {
     @Column(nullable = false)
     private Integer priority;
 
-    @Column(nullable = false)
+    @Column
     private Boolean done;
 
     public Task(TaskRequestDTO data) {
