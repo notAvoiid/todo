@@ -3,6 +3,7 @@ package com.abreu.todo.controller;
 import com.abreu.todo.model.dto.TaskRequestDTO;
 import com.abreu.todo.model.dto.TaskResponseDTO;
 import com.abreu.todo.service.TaskService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,12 +31,12 @@ public class TaskController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<List<TaskResponseDTO>> updatePartial(@PathVariable Long id, @RequestBody TaskRequestDTO dto) {
+    public ResponseEntity<List<TaskResponseDTO>> updatePartial(@PathVariable Long id, @RequestBody @Valid TaskRequestDTO dto) {
         return ResponseEntity.ok(taskService.updateTask(id, dto));
     }
 
     @PostMapping
-    public ResponseEntity<List<TaskResponseDTO>> save(@RequestBody TaskRequestDTO data) {
+    public ResponseEntity<List<TaskResponseDTO>> save(@RequestBody @Valid TaskRequestDTO data) {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.save(data));
     }
 
