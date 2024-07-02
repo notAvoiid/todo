@@ -38,4 +38,10 @@ public class TaskController {
     public ResponseEntity<List<TaskResponseDTO>> save(@RequestBody TaskRequestDTO data) {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.save(data));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        taskService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

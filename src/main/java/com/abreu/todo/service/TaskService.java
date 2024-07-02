@@ -66,4 +66,10 @@ public class TaskService {
         log.info("Saving a task!");
         return findAll();
     }
+
+    @Transactional
+    public void delete(Long id) {
+        log.warn("Deleting a task");
+        taskRepository.deleteById(id);
+    }
 }
