@@ -29,6 +29,11 @@ public class TaskController {
         return ResponseEntity.ok(taskService.findById(id));
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<List<TaskResponseDTO>> updatePartial(@PathVariable Long id, @RequestBody TaskRequestDTO dto) {
+        return ResponseEntity.ok(taskService.updateTask(id, dto));
+    }
+
     @PostMapping
     public ResponseEntity<List<TaskResponseDTO>> save(@RequestBody TaskRequestDTO data) {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.save(data));

@@ -26,7 +26,7 @@ public class Task {
     @Column(nullable = false)
     private Integer priority;
 
-    @Column
+    @Column(nullable = false)
     private Boolean done;
 
     public Task(TaskRequestDTO data) {
@@ -36,11 +36,11 @@ public class Task {
         this.done = false;
     }
 
-    public Task(Long id, String title, String description, Integer priority) {
+    public Task(Long id, String title, String description, Integer priority, Boolean done) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.priority = priority;
-        this.done = false;
+        this.done = done;
     }
 }

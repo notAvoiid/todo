@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +37,26 @@ public class TaskService {
         List<Task> taskList = taskRepository.findAll(sort);
         log.info("Finding all tasks!");
         return taskList.stream().map(TaskResponseDTO::new).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<TaskResponseDTO> updateTask(Long id, TaskRequestDTO dto) {
+        Optional<Task> existingTask = taskRepository.findById(id);
+        if (existingTask.isPresent()) {
+            Task taskToUpdate = existingTask.get();
+            if (dto.title() != null && !(dto.title().equals(taskToUpdate.getTitle())))
+                taskToUpdate.setTitle(dto.title());
+            if (dto.description() != null && !(dto.description().equals(taskToUpdate.getDescription())))
+                taskToUpdate.setDescription(dto.description());
+            if (dto.priority() != null && !(dto.priority().equals(taskToUpdate.getPriority())))
+                taskToUpdate.setPriority(dto.priority());
+            if (dto.done() != null && !(dto.done().equals(taskToUpdate.getDone())))
+                taskToUpdate.setDone(dto.done());
+
+            return findAll();
+        } else {
+            throw new TaskNotFoundException(String.format("id:%s not found!", id));
+        }
     }
 
     @Transactional
